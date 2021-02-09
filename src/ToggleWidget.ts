@@ -18,7 +18,7 @@ export default class ToggleWidget extends SkullyCore.TopBarMenuWidget {
         let str = "";
         if (choices.length>0)
         {
-            const closeStr = "l('toggleBox').innerHTML='';Game.choiceSelectorOn=-1;PlaySound('snd/tick.mp3');"
+            const closeStr = "l('toggleBox').style.display='none';l('toggleBox').innerHTML='';Game.choiceSelectorOn=-1;PlaySound('snd/tick.mp3');"
             let selected = 0;
             choices.forEach((value) => {
                 if (value.selected) selected=value;
@@ -29,7 +29,7 @@ export default class ToggleWidget extends SkullyCore.TopBarMenuWidget {
             str=\`<div class="close" onclick="l('toggleBox').style.display='none';\${closeStr}">x</div>
             <h3>\${me.name}</h3>
             <div class="line"></div>
-            <h4 id="choiceSelectedName">'\${choices[selected].name}'</h4>
+            <h4 id="choiceSelectedName">\${choices[selected].name}</h4>
             <div class="line"></div>\`.replace("\\n", "")
 
             choices.forEach((value, index) => {
@@ -46,21 +46,21 @@ export default class ToggleWidget extends SkullyCore.TopBarMenuWidget {
             for (let i=0;i<choices.length;i++)
             {
                 if (!choices[i]) continue;
-                var icon=choices[i].icon;
                 var id=choices[i].id;
                 if (choices[i].div) str+='<div class="line"></div>';
                 str+=\`<div 
                 class="crate enabled\${id==selected?' highlighted':''}" 
-                style="opacity:1;float:none;display:inline-block\${window.SkullyCore.IconToStyle(icon)}}" 
+                style="opacity:1;float:none;display:inline-block;\${window.SkullyCore.IconToStyle(choices[i].icon)}}" 
                 onclick="window.SkullyCore.BarWidgets.TopBar.Bars[\${me.index}].choicesPick(\${id});\${closeStr}" 
                 onMouseOut="l('choiceSelectedName').innerHTML=Game.choiceSelectorChoices[Game.choiceSelectorSelected].name;" 
                 onMouseOver="l('choiceSelectedName').innerHTML=Game.choiceSelectorChoices[\${i}].name;">
                 </div>\`;
             }
         }
-        l('toggleBox').innerHTML=str;
-        l('toggleBox').style.display='block';
-        l('toggleBox').focus();
+        let toggleBox = l('toggleBox')
+        toggleBox.innerHTML=str;
+        toggleBox.style.display='block';
+        toggleBox.focus();
         Game.tooltip.hide();
         PlaySound('snd/tick.mp3');`) as () => void;
     }
