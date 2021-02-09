@@ -26,6 +26,7 @@
 	"dependencies": {
 		"skullycore": "^1.0.9"
 	},
+	"main": "./dist/index.js",
 	"cc-repo": {
 		"icon": [21, 10],
 		"name": "Additional Bars & Widgets"
