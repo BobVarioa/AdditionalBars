@@ -25,5 +25,9 @@
 	},
 	"dependencies": {
 		"skullycore": "^1.0.9"
+	},
+	"cc-repo": {
+		"icon": [21, 10],
+		"name": "Additional Bars & Widgets"
 	}
 }
